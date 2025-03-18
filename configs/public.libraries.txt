@@ -1,0 +1,14 @@
+libHpr_RecGAE_cvFeature_v1.0.camera.samsung.so
+libOpenCL.so
+libOpenCv.camera.samsung.so
+libSEF.quram.so
+libadsprpc.so
+libcdsprpc.so
+libfastcvopt.so
+libhta_hexagon_runtime.so
+libnpu.so
+libqti-perfd-client.so
+libsdsprpc.so
+libsmart_cropping.camera.samsung.so
+libxcv.camera.samsung.so
+unnhal-acc-hta.so

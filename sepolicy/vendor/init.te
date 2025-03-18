@@ -1,0 +1,20 @@
+allow init omr_file:dir mounton;
+
+allow init sysfs_vibrator:file read;
+allow init hal_perf_default:binder call;
+allow init mm-qcamerad:unix_dgram_socket sendto;
+allow init ion_device:chr_file ioctl;
+allow init same_process_hal_file:file execute;
+allow init gpu_device:chr_file { read write };
+allow init gpu_device:chr_file open;
+allow init vendor_app_file:dir mounton;
+allow init efs_file:dir mounton;
+allow init oemfs:dir mounton;
+allow init runtime_event_log_tags_file:file getattr;
+allow init proc:file setattr;
+allow init sysfs:file setattr;
+allow init vendor_file:file execute;
+allow init proc_hostname:file getattr;
+allow init proc_overcommit_memory:file getattr;
+allow init proc_min_free_order_shift:file getattr;
+allow init proc_dirty:file getattr;

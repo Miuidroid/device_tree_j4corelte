@@ -1,0 +1,7 @@
+allow hal_perf_default self:capability kill;
+
+allow hal_perf_default proc_sched:file rw_file_perms;
+
+allow hal_perf_default debugfs_trace_marker:file getattr;
+
+get_prop(hal_perf_default, sec_camera_prop)

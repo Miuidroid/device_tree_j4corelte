@@ -1,0 +1,285 @@
+on post-fs-data
+
+#battery smart charge
+    chown system system /sys/class/power_supply/battery/batt_slate_mode
+
+# OLAF setup cgroup freezer
+    mkdir /dev/freezer
+    mount cgroup none /dev/freezer freezer
+    mkdir /dev/freezer/olaf
+    write /dev/freezer/olaf/freezer.state THAWED
+    mkdir /dev/cpuset/olaf
+    copy /dev/cpuset/cpus /dev/cpuset/olaf/cpus
+    copy /dev/cpuset/mems /dev/cpuset/olaf/mems
+    chown system system /dev/freezer/olaf
+    chown system system /dev/freezer/olaf/tasks
+    chown system system /dev/freezer/olaf/cgroup.procs
+    chown system system /dev/freezer/olaf/freezer.state
+    chown system system /dev/cpuset/olaf
+    chown system system /dev/cpuset/olaf/tasks
+    chown system system /dev/cpuset/olaf/cpus
+    chmod 0644 /dev/freezer/olaf/tasks
+    chmod 0644 /dev/freezer/olaf/cgroup.procs
+    chmod 0644 /dev/freezer/olaf/freezer.state
+    chmod 0664 /dev/cpuset/olaf
+    chmod 0664 /dev/cpuset/olaf/tasks
+    chmod 0664 /dev/cpuset/olaf/cpus
+	
+# Accelerometer Sensor
+    chown system radio /sys/class/sensors/accelerometer_sensor/name
+    chown system radio /sys/class/sensors/accelerometer_sensor/vendor
+    chown system radio /sys/class/sensors/accelerometer_sensor/raw_data
+    chown system radio /sys/class/sensors/accelerometer_sensor/calibration
+    chown system radio /sys/class/sensors/accelerometer_sensor/selftest
+    chown system radio /sys/class/sensors/accelerometer_sensor/reactive_alert
+    chown system radio /sys/class/sensors/accelerometer_sensor/lowpassfilter
+    chown system system /sys/class/sensors/accelerometer_sensor/dhr_sensor_info
+
+# Gyro Sensor
+    chown system radio /sys/class/sensors/gyro_sensor/name
+    chown system radio /sys/class/sensors/gyro_sensor/vendor
+    chown system radio /sys/class/sensors/gyro_sensor/selftest_revised
+    chown system radio /sys/class/sensors/gyro_sensor/power_on
+    chown system radio /sys/class/sensors/gyro_sensor/power_off
+    chown system radio /sys/class/sensors/gyro_sensor/selftest
+    chown system media /sys/class/sensors/gyro_sensor/temperature
+
+# Magnetic Sensor
+    chown system radio /sys/class/sensors/magnetic_sensor/name
+    chown system radio /sys/class/sensors/magnetic_sensor/vendor
+    chown system radio /sys/class/sensors/magnetic_sensor/raw_data
+    chown system radio /sys/class/sensors/magnetic_sensor/adc
+    chown system radio /sys/class/sensors/magnetic_sensor/asa
+    chown system radio /sys/class/sensors/magnetic_sensor/dac
+    chown system radio /sys/class/sensors/magnetic_sensor/chk_registers
+    chown system radio /sys/class/sensors/magnetic_sensor/selftest
+    chown system system /sys/class/sensors/magnetic_sensor/dhr_sensor_info
+
+# Proximity Sensor
+    chown system radio /sys/class/sensors/proximity_sensor/name
+    chown system radio /sys/class/sensors/proximity_sensor/vendor
+    chown system radio /sys/class/sensors/proximity_sensor/state
+    chown system radio /sys/class/sensors/proximity_sensor/raw_data
+    chown system radio /sys/class/sensors/proximity_sensor/barcode_emul_en
+    chown system radio /sys/class/sensors/proximity_sensor/prox_avg
+    chown system radio /sys/class/sensors/proximity_sensor/prox_cal
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_low
+    chown system radio /sys/class/sensors/proximity_sensor/prox_offset_pass
+    chown system radio /sys/class/sensors/proximity_sensor/prox_trim
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_high
+    chown system radio /sys/class/sensors/proximity_sensor/thresh_detect_low
+    chown system radio /sys/class/sensors/proximity_sensor/prox_alert_thresh
+    chown system system /sys/class/sensors/proximity_sensor/dhr_sensor_info
+
+# Light Sensor
+    chown system radio /sys/class/sensors/light_sensor/name
+    chown system radio /sys/class/sensors/light_sensor/vendor
+    chown system radio /sys/class/sensors/light_sensor/lux
+    chown system radio /sys/class/sensors/light_sensor/raw_data
+    chown system radio /sys/class/sensors/light_sensor/coef
+	
+# Meta event
+    chown system radio /sys/class/sensors/sensor_dev/flush
+    
+# setup cgroup freezer for freecess
+    mkdir /dev/freezer
+    mount cgroup none /dev/freezer freezer
+    mkdir /dev/freezer/frozen
+    mkdir /dev/freezer/thaw
+    write /dev/freezer/frozen/freezer.state FROZEN
+    write /dev/freezer/thaw/freezer.state THAWED
+
+# MARs for freecess
+    chown system system /dev/freezer
+    chown system system /dev/freezer/frozen
+    chown system system /dev/freezer/frozen/tasks
+    chown system system /dev/freezer/frozen/cgroup.procs
+    chown system system /dev/freezer/frozen/freezer.state
+    chown system system /dev/freezer/thaw
+    chown system system /dev/freezer/thaw/tasks
+    chown system system /dev/freezer/thaw/cgroup.procs
+
+# MARs for freecess
+    chmod 0644 /dev/freezer/frozen/tasks
+    chmod 0644 /dev/freezer/frozen/cgroup.procs
+    chmod 0644 /dev/freezer/frozen/freezer.state
+    chmod 0644 /dev/freezer/thaw/tasks
+    chmod 0644 /dev/freezer/thaw/cgroup.procs
+
+on boot
+
+#BUS Permissions
+    chmod 0664 /sys/class/devfreq/soc:qcom,cpubw/available_frequencies
+    chmod 0664 /sys/class/devfreq/soc:qcom,cpubw/min_freq
+    chmod 0664 /sys/class/devfreq/soc:qcom,cpubw/max_freq
+    chown root system /sys/class/devfreq/soc:qcom,cpubw/available_frequencies
+    chown root system /sys/class/devfreq/soc:qcom,cpubw/min_freq
+    chown root system /sys/class/devfreq/soc:qcom,cpubw/max_freq
+
+#Input Booster Permissions
+    chmod 0664 /sys/class/input_booster/level
+    chmod 0664 /sys/class/input_booster/head
+    chmod 0664 /sys/class/input_booster/tail
+    chown system radio /sys/class/input_booster/level
+    chown system radio /sys/class/input_booster/head
+    chown system radio /sys/class/input_booster/tail
+
+
+# SSWAP
+    write /proc/sys/vm/swappiness 110
+
+# POC
+    chown system system /dev/poc
+    chmod 0660 /dev/poc
+
+    chown system system /sys/class/lcd/panel/poc
+    chmod 0660 /sys/class/lcd/panel/poc
+
+# POC_MCA
+    chown system system /sys/class/lcd/panel/poc_mca
+    chmod 0440 /sys/class/lcd/panel/poc_mca
+
+# POC_INFO
+    chown system system /sys/class/lcd/panel/poc_info
+    chmod 0440 /sys/class/lcd/panel/poc_info
+
+    chown system system /sys/class/lcd/panel/window_type
+    chown system system /sys/class/lcd/panel/read_copr
+    chown system system /sys/class/lcd/panel/power_reduce
+    chown 0660 /sys/class/lcd/panel/power_reduce
+    chown system system /sys/class/lcd/panel/siop_enable
+    chown system system /sys/class/lcd/panel/temperature
+    chown 0660 /sys/class/lcd/panel/temperature
+    chown system system /sys/class/lcd/panel/tuning
+    chown 0660 /sys/class/lcd/panel/tuning
+    chown system system /sys/class/lcd/panel/lux
+    
+	# adaptive control
+    chown system system /sys/class/lcd/panel/adaptive_control
+    chmod 0660 /sys/class/lcd/panel/adaptive_control
+
+    # AOD(Always On Display)
+    chown system system /sys/class/lcd/panel/alpm
+    chmod 0660 /sys/class/lcd/panel/alpm
+
+    # HMT
+    chown system system /sys/class/lcd/panel/hmt_on
+    chmod 0660 /sys/class/lcd/panel/hmt_on
+    chown system system /sys/class/lcd/panel/hmt_bright
+    chmod 0660 /sys/class/lcd/panel/hmt_bright
+    chown system system /sys/class/mdnie/mdnie/hmt_color_temperature
+    chmod 0660 /sys/class/mdnie/mdnie/hmt_color_temperature
+    chown system system /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+    chmod 0660 /sys/class/graphics/fb0/msm_cmd_autorefresh_en
+
+    # IRC
+    chown system system /sys/class/lcd/panel/irc
+    chmod 0660 /sys/class/lcd/panel/irc
+
+    # X-Talk
+    chown system system /sys/class/lcd/panel/xtalk_mode
+    chmod 0660 /sys/class/lcd/panel/xtalk_mode
+
+    # DDI H/W Cursor
+    chown system system /sys/class/lcd/panel/hw_cursor
+    chmod 0660 /sys/class/lcd/panel/hw_cursor
+    
+    # Auto Brightness
+    chown system system /sys/class/backlight/panel/brightness
+    chmod 0660 /sys/class/backlight/panel/brightness    
+    chown system system /sys/class/backlight/panel/brightness_step
+    chmod 0660 /sys/class/backlight/panel/brightness_step
+    chown system system /sys/class/backlight/panel/weakness_ccb
+    chmod 0660 /sys/class/backlight/panel/weakness_ccb
+    
+    # LCD mdnie and panel work    
+    chown system system /sys/class/mdnie/mdnie/scenario
+    chmod 0660 /sys/class/mdnie/mdnie/scenario
+    chown system system /sys/class/mdnie/mdnie/outdoor
+    
+    chown system system /sys/class/mdnie/mdnie/mode
+    chown system system /sys/class/mdnie/mdnie/accessibility
+         
+    chown system system  /sys/class/mdnie/mdnie/cabc
+    chown system system  /sys/class/mdnie/mdnie/bypass
+    
+    chown system system /sys/class/mdnie/mdnie/mdnie_ldu
+    chmod 0660 /sys/class/mdnie/mdnie/mdnie_ldu
+    
+    chown system system /sys/class/mdnie/mdnie/night_mode
+    chmod 0660 /sys/class/mdnie/mdnie/night_mode
+    
+    chown system system /sys/class/mdnie/mdnie/hdr
+    chmod 0660 /sys/class/mdnie/mdnie/hdr
+    
+    chown system system /sys/class/mdnie/mdnie/light_notification
+    chmod 0660 /sys/class/mdnie/mdnie/light_notification
+    
+    chown system system /sys/class/mdnie/mdnie/color_lens
+    chmod 0660 /sys/class/mdnie/mdnie/color_lens
+    
+    chown system system /sys/class/mdnie/mdnie/whiteRGB
+    chmod 0660 /sys/class/mdnie/mdnie/whiteRGB      
+    
+    chown radio system /sys/class/lcd/panel/partial_disp
+    chmod 0660 /sys/class/lcd/panel/partial_disp
+
+    chown radio system /sys/class/lcd/panel/cover_control
+    chmod 0660 /sys/class/lcd/panel/cover_control
+
+    chown system system /sys/class/lcd/panel/ldu_correction
+    chmod 0660 /sys/class/lcd/panel/ldu_correction
+
+    chown system system /sys/class/lcd/panel/dpui
+    chown system system /sys/class/lcd/panel/dpui_dbg
+    
+    chown system system /sys/class/leds/lcd-backlight/brightness
+    chmod 0660 /sys/class/leds/lcd-backlight/brightness
+on fs
+
+# SSWAP
+# service swapon /sbin/sswap -s -f 2048
+    # class core
+    # user root
+    # group root
+    # seclabel u:r:sswap:s0
+    # oneshot
+
+# faced
+service faced /system/bin/faced
+    class late_start
+    user system
+    group system
+    
+# Remosaic daemon works with mm-camera daemon
+#service remosaic_daemon /vendor/bin/remosaic_daemon
+#    class core
+#    user camera
+#    group camera
+
+# Move 2 SD card
+#service extSdUFSVold /system/bin/extSDCardServiceVold
+#   class main
+#   user system
+#   group system mount radio net_bt sdcard_rw shell media media_rw
+
+	#Bluetooth
+    # for BT MAC address
+#    mkdir /efs/bluetooth 0770 system bluetooth
+    # if already exist
+#    chown system bluetooth /efs/bluetooth
+#    chown system bluetooth /efs/bluetooth/bt_addr
+#    chmod 0770 /efs/bluetooth
+#    chmod 0660 /efs/bluetooth/bt_addr
+
+    # permissions for bluetooth.
+#    setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
+#    chown bluetooth bluetooth ro.bt.bdaddr_path
+#    chown bluetooth bluetooth /dev/ttyHS0
+#    chmod 0660 /dev/ttyHS0
+#    chmod 0660 /sys/class/rfkill/rfkill0/state
+#    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+#    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+#    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+#    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/device/extldo
