@@ -21,3 +21,5 @@
 ## Device Picture
 
 ![Galaxy J4 Core](https://fdn2.gsmarena.com/vv/pics/samsung/samsung-galaxy-j4-core-sm-g410g-1.jpg "Galaxy J4 Core")
+
+Thanks Vhmit for base!
