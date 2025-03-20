@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2019 The rr Project
+# Copyright (C) 2019 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -10,7 +10,7 @@ $(call inherit-product-if-exists, ih8sn/product.mk)
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-rr
+    $(LOCAL_PATH)/overlay-lineage
     
 PRODUCT_ENFORCE_RRO_TARGETS := \
     framework-res

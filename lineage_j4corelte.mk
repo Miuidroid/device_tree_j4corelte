@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2023 The rr Project
+# Copyright (C) 2023 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -11,7 +11,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 # Inherit some common Lineage stuff
-$(call inherit-product, vendor/rr/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 # Inherit from j4corelte device
 $(call inherit-product, $(LOCAL_PATH)/device.mk)
@@ -22,7 +22,7 @@ TARGET_BOOT_ANIMATION_RES := 720
 PRODUCT_BRAND := Samsung
 PRODUCT_DEVICE := j4corelte
 PRODUCT_MANUFACTURER := Samsung
-PRODUCT_NAME := rr_j4corelte
+PRODUCT_NAME := lineage_j4corelte
 PRODUCT_MODEL := Galaxy J4 Core
 
 PRODUCT_GMS_CLIENTID_BASE := android-samsung
